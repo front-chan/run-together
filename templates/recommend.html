@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏃‍♀‍위드런🏃‍♂ || 함께 달려요!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+          /*  background-image: linear-gradient(*/
+          /*  0deg,*/
+          /*  rgba(0, 0, 0, 0.5),*/
+          /*  rgba(0, 0, 0, 0.5)*/
+          /*),url('https://images.unsplash.com/photo-1596727362302-b8d891c42ab8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTM0fHxydW5uaW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60');*/
+          /*  background-size: cover;*/
+          /*  background-position: center 20%;*/
+        }
+        #navbar {
+            background-color: #1f44a8;
+            height: 180px;
+            /*border-bottom: 1px solid #1f44a8;*/
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .logo-link {
+            font-size: 80px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        #recommend-box {
+            margin: 10px auto;
+            max-width: 1200px;
+            width: 95%;
+        }
+        #recommend-box > h1 {
+            font-size: 30px;
+            margin-left: 10px;
+        }
+        .category-btns {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 15px;
+        }
+        .box-btn {
+            display: flex;
+            margin: 10px 0;
+        }
+        .box-btn > button {
+            font-size: 15px;
+            width: 100px;
+            padding: 5px 10px;
+            border: 1px solid #d7f4fd;
+            border-radius: 5px;
+            margin-left: 10px;
+            background-color: transparent;
+            transition: background-color .25s ease-in-out;
+            cursor: pointer;
+        }
+        .box-btn > button:hover {
+            background-color: #a7e2f6;
+        }
+        .post-link {
+            margin-right: 150px;
+            text-decoration: none;
+            color: #1f44a8;
+            font-weight: bold;
+        }
+        .post-link:hover {
+            text-decoration: underline;
+        }
+        #products-box-shoes, #products-box-diet {
+            display: flex;
+            /*display: none;*/
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+        .shoes-box {
+            flex: 0 1 250px;
+            max-width: 250px;
+            height: 380px;
+            width: 95%;
+            /*border: 0.2px solid #bfebfa;*/
+            box-shadow: 0px 0px 6px 0px #bfebfa;
+            border-radius: 10px;
+            margin: 10px;
+            overflow: hidden;
+        }
+        .shoes-box > img {
+            width: 250px;
+            height: 167px;
+        }
+        .text-box {
+            color: #014b64;
+            margin: 10px;
+        }
+        .text-box > h5 {
+            margin-top: 0px;
+        }
+        .text-box > p {
+            max-height: 140px;
+            overflow: scroll;
+        }
+
+        @media (max-width: 768px) {
+            #products-box-shoes, #products-box-diet {
+                justify-content: center;
+            }
+            .category-btns {
+                align-items: center;
+                flex-direction: column;
+            }
+            .post-link {
+                margin-right: 0px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <a class="logo-link" href="index.html">🏃‍♀‍위드런🏃‍♂ </a>
+    </nav>
+    <section id="recommend-box">
+        <h1>💁용품 추천</h1>
+        <div class="category-btns">
+            <div class="box-btn">
+                <button class="all-btn">All🔍</button>
+                <button class="shoes-btn">러닝화👟</button>
+                <button class="diet-btn">다이어트🍗</button>
+            </div>
+            <a class="post-link" href="/recommend/post">추천하기</a>
+        </div>
+        <div id="products-box-shoes">
+            <div class="shoes-box">
+                <img src="https://images.unsplash.com/photo-1558109195-c668bcf42e93?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTMwfHxydW5uaW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="run">
+                <div class="text-box">
+                    <h5>닉네임 name</h5>
+                    <p>추천이유 추천이유 추천이유 추천이유 추천이유 추천이유 추천이유 추천이유 추천이유 Lorem ipsum 추천이유추천이유추천이유추천이유dolor sit amet, consectetur adipisicing elit. Molestiae, obcaecati, ratione. Ab animi architecto autem dignissimos est ex fugiat laborum officia quidem quod quos saepe, similique sit velit, voluptate. Facere!</p>
+                </div>
+            </div>
+            <div class="shoes-box">
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8cnVubmluZyUyMHNob2VzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="run">
+                <div class="text-box">
+                    <h5>닉네임 name</h5>
+                    <p>추천이유 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, obcaecati, ratione. Ab animi architecto autem dignissimos est ex fugiat laborum officia quidem quod quos saepe, similique sit velit, voluptate. Facere!</p>
+                </div>
+            </div>
+            <div class="shoes-box">
+                <img src="https://images.unsplash.com/photo-1469395446868-fb6a048d5ca3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8cnVubmluZyUyMHNob2VzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="run">
+                <div class="text-box">
+                    <h5>닉네임 name</h5>
+                    <p>추천이유 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, obcaecati, ratione. Ab animi architecto autem dignissimos est ex fugiat laborum officia quidem quod quos saepe, similique sit velit, voluptate. Facere!</p>
+                </div>
+            </div>
+            <div class="shoes-box">
+                <img src="https://images.unsplash.com/photo-1611080027147-a1a0b6e05168?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fHJ1bm5pbmclMjBzaG9lc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="run">
+                <div class="text-box">
+                    <h5>닉네임 name</h5>
+                    <p>추천이유 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, obcaecati, ratione. Ab animi architecto autem dignissimos est ex fugiat laborum officia quidem quod quos saepe, similique sit velit, voluptate. Facere!</p>
+                </div>
+            </div>
+            <div class="shoes-box">
+                <img src="https://images.unsplash.com/photo-1548801133-da353ebb1d97?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzN8fHJ1bm5pbmclMjBzaG9lc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="run">
+                <div class="text-box">
+                    <h5>닉네임 name</h5>
+                    <p>추천이유 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, obcaecati, ratione. Ab animi architecto autem dignissimos est ex fugiat laborum officia quidem quod quos saepe, similique sit velit, voluptate. Facere!</p>
+                </div>
+            </div>
+            <div class="shoes-box">
+                <img src="https://images.unsplash.com/photo-1612902377653-b0d4cfce3deb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDd8fHJ1bm5pbmclMjBzaG9lc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="run">
+                <div class="text-box">
+                    <h5>닉네임 name</h5>
+                    <p>추천이유 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, obcaecati, ratione. Ab animi architecto autem dignissimos est ex fugiat laborum officia quidem quod quos saepe, similique sit velit, voluptate. Facere!</p>
+                </div>
+            </div>
+            <div class="shoes-box">
+                <img src="https://images.unsplash.com/photo-1520256862855-398228c41684?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTZ8fHJ1bm5pbmclMjBzaG9lc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="run">
+                <div class="text-box">
+                    <h5>닉네임 name</h5>
+                    <p>추천이유 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, obcaecati, ratione. Ab animi architecto autem dignissimos est ex fugiat laborum officia quidem quod quos saepe, similique sit velit, voluptate. Facere!</p>
+                </div>
+            </div>
+        </div>
+        <div id="products-box-diet">
+            <div class="shoes-box">
+                <img src="https://images.unsplash.com/photo-1611077544218-c93992b06e92?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZGlldCUyMGRydWd8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60" alt="diet">
+                <div class="text-box">
+                    <h5>닉네임 name</h5>
+                    <p>추천이유 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, obcaecati, ratione. Ab animi architecto autem dignissimos est ex fugiat laborum officia quidem quod quos saepe, similique sit velit, voluptate. Facere!</p>
+                </div>
+            </div>
+            <div class="shoes-box">
+                <img src="https://images.unsplash.com/photo-1505714197102-6ae95091ed70?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjh8fGRpZXQlMjBkcnVnfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="diet">
+                <div class="text-box">
+                    <h5>닉네임 name</h5>
+                    <p>추천이유 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, obcaecati, ratione. Ab animi architecto autem dignissimos est ex fugiat laborum officia quidem quod quos saepe, similique sit velit, voluptate. Facere!</p>
+                </div>
+            </div>
+            <div class="shoes-box">
+                <img src="https://images.unsplash.com/photo-1508170754725-6e9a5cfbcabf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDR8fGRpZXQlMjBkcnVnfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="diet">
+                <div class="text-box">
+                    <h5>닉네임 name</h5>
+                    <p>추천이유 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, obcaecati, ratione. Ab animi architecto autem dignissimos est ex fugiat laborum officia quidem quod quos saepe, similique sit velit, voluptate. Facere!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <script>
+        const allBtn = document.querySelector('.all-btn')
+        const shoesBtn = document.querySelector('.shoes-btn')
+        const dietBtn = document.querySelector('.diet-btn')
+        const productsBoxShoes = document.getElementById('products-box-shoes')
+        const productsBoxDiet = document.getElementById('products-box-diet')
+
+        allBtn.addEventListener('click', () => {
+            productsBoxShoes.style.display = 'flex'
+            productsBoxDiet.style.display = 'flex'
+        })
+        shoesBtn.addEventListener('click', () => {
+            productsBoxShoes.style.display = 'flex'
+            productsBoxDiet.style.display = 'none'
+        })
+
+        dietBtn.addEventListener('click', () => {
+            productsBoxShoes.style.display = 'none'
+            productsBoxDiet.style.display = 'flex'
+        })
+
+    </script>
+</body>
+</html>

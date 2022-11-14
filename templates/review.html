@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏃‍♀‍위드런🏃‍♂ || 함께 달려요!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+          /*  background-image: linear-gradient(*/
+          /*  0deg,*/
+          /*  rgba(0, 0, 0, 0.5),*/
+          /*  rgba(0, 0, 0, 0.5)*/
+          /*),url('https://images.unsplash.com/photo-1596727362302-b8d891c42ab8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTM0fHxydW5uaW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60');*/
+          /*  background-size: cover;*/
+          /*  background-position: center 20%;*/
+        }
+        #navbar {
+            background-color: #1f44a8;
+            height: 180px;
+            border-bottom: 1px solid #1f44a8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .logo-link {
+            font-size: 80px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        #recommend-box {
+            margin: 10px auto;
+            max-width: 1200px;
+            width: 95%;
+        }
+        #recommend-box > h1 {
+            font-size: 30px;
+            margin-left: 10px;
+        }
+        .category-btns {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 15px;
+        }
+        .box-btn {
+            display: flex;
+            margin: 10px 0;
+        }
+        .box-btn > button {
+            font-size: 15px;
+            width: 100px;
+            padding: 5px 10px;
+            border: 1px solid #d7f4fd;
+            border-radius: 5px;
+            margin-left: 10px;
+            background-color: transparent;
+            transition: background-color .25s ease-in-out;
+            cursor: pointer;
+        }
+        .box-btn > button:hover {
+            background-color: #a7e2f6;
+        }
+        .post-link {
+            margin-right: 150px;
+            text-decoration: none;
+            color: #1f44a8;
+            font-weight: bold;
+        }
+        .post-link:hover {
+            text-decoration: underline;
+        }
+        #review-box {
+            margin: 10px auto;
+            max-width: 1200px;
+            width: 95%;
+            margin-left: 10px;
+            display: flex;
+            justify-content: flex-start;
+        }
+        .input-box {
+            display: flex;
+            flex-direction: column;
+            max-width: 500px;
+            width: 95%;
+            margin-right: 40px;
+        }
+        .input-box > input {
+            max-width: 460px;
+            margin: 10px 10px 10px 20px;
+            height: 30px;
+            border-radius: 10px;
+            border: 0;
+            font-size: 15px;
+            box-shadow: 1px 1px 6px 0px #a7e2f6;
+            background-color: #d7f4fd;
+        }
+        .input-box > label {
+            margin: 10px 0 0 10px;
+            color: #1f44a8;
+        }
+        .input-box > textarea {
+            max-width: 500px;
+            margin: 20px 20px 30px 20px;
+            border-radius: 10px;
+            border: 0;
+            font-size: 15px;
+            box-shadow: 1px 1px 6px 0px #a7e2f6;
+            background-color: #d7f4fd;
+        }
+        .review-img {
+            border-radius: 10px;
+            max-width: 500px;
+            margin-top: 30px;
+            opacity: 75%;
+        }
+        .recommend-btn {
+            width: 100px;
+            margin-left: 30px;
+            padding: 5px 10px;
+            border-radius: 10px;
+            background-color: #1f44a8;
+            border: 0;
+            color: white;
+            cursor: pointer;
+            transition: background-color .35s ease-in-out;
+        }
+        .recommend-btn:hover {
+            background-color: #2c3e70;
+        }
+
+        @media (max-width: 768px) {
+            .category-btns {
+                align-items: center;
+                flex-direction: column;
+            }
+            .post-link {
+                margin-right: 0px;
+            }
+            #review-box {
+                flex-direction: column-reverse;
+           }
+        }
+
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <a class="logo-link" href="index.html">🏃‍♀‍위드런🏃‍♂ </a>
+    </nav>
+    <section id="recommend-box">
+        <h1>💁용품 추천</h1>
+        <div class="category-btns">
+            <div class="box-btn">
+                <button class="all-btn">All🔍</button>
+                <button class="shoes-btn">러닝화👟</button>
+                <button class="diet-btn">보조제🔋</button>
+            </div>
+            <a class="post-link" href="/recommend">뒤로가기</a>
+        </div>
+        <div id="review-box">
+            <div class="input-box">
+                <label for="name">닉네임</label>
+                <input type="text" id="name" placeholder="name">
+                <label for="url">이미지 URL</label>
+                <input type="text" id="url" placeholder="image URL">
+                <label for="comment">추천 이유</label>
+                <textarea name="comment" id="comment" cols="35" rows="7" placeholder="comment"></textarea>
+                <button type="type" class="recommend-btn">추천하기</button>
+            </div>
+            <img class="review-img" src="https://media.istockphoto.com/id/1366052585/photo/shot-of-a-group-of-friends-hanging-out-before-working-out-together.jpg?b=1&s=170667a&w=0&k=20&c=z5JTIJ3k0QgJCEMPpJQ_JvnGzN_izKQgJRB5YKHgFV0="
+                 alt="">
+
+        </div>
+
+    </section>
+</body>
+</html>

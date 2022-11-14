@@ -13,5 +13,13 @@ db = client.dbsparta
 def home():
     return render_template('index.html')
 
+@app.route('/recommend')
+def recommend():
+    return render_template('recommend.html')
+
+@app.route('/recommend/post')
+def reviews():
+    return render_template('review.html')
+
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
