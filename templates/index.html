@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <title>위드런</title>
+
+    <script src="https://kit.fontawesome.com/4c0dfea791.js" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+
+
+    <style>
+        * {
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+
+        .mytitle {
+            width: 100%;
+            height: 350px;
+
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1547483238-f400e65ccd56?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80');
+            background-position: 50% 70%;
+            background-size: cover;
+
+            color: white;
+            background-color: black;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mytitle > button {
+            width: 150px;
+            height: 50px;
+
+            background-color: transparent;
+            color: white;
+
+            border-radius: 50px;
+            border: 1px solid white;
+
+            margin-top: 10px;
+        }
+
+        .mytitle > button:hover {
+            border: 2px solid white;
+        }
+
+        .mycomment {
+            color: gray;
+        }
+
+        .mycards {
+            margin: 20px auto 20px auto;
+            width: 95%;
+            max-width: 1200px;
+        }
+
+        .font-bold {
+            font-weight: bold;
+
+        }
+
+        .mypost {
+            width: 95%;
+            max-width: 500px;
+
+            height: 500px;
+
+            margin: 20px auto 0px auto;
+            padding: 20px;
+            box-shadow: 0px 0px 3px 0px gray;
+
+            /*display: none;*/
+        }
+
+        .mybtns {
+            float: right;
+        }
+
+        .mybtns > button {
+            margin-right: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+        a:hover{
+            color: white;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        .challeng_contents {
+            border: none;
+
+        }
+
+        .challeng_contents:focus {
+            outline: none;
+        }
+
+    </style>
+    <script>
+        $(document).ready(function () {
+            listing();
+        });
+
+        function listing() {
+            $.ajax({
+                type: 'GET',
+                url: '/api/challengeList',
+                data: {},
+                success: function (response) {
+                    console.log(response['challeng'])
+
+                    let rows = response['challeng']
+                    for (let i = 0; i < rows.length; i++){
+                        let challeng_num = rows[i]['challeng_num']
+                        let challeng_title = rows[i]['challeng_title']
+                        let challeng_deadline = rows[i]['challeng_deadline']
+                        let challeng_start_date = rows[i]['challeng_start_date']
+                        let challeng_end_date = rows[i]['challeng_end_date']
+                        let challeng_contents = rows[i]['challeng_contents']
+
+                        let temp_html = `<div class="col">
+                                            <div class="card h-100">
+                                                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjAxMjBfOTQg%2FMDAxNjQyNjU1NDE3MjUy.MRNWjEO1S-P0MWyY_C9iRwQL0QnnuqD1i5TC2KGpMLsg.ErbHNyL9VF9GwRXQOmqkqqrnRhurCLTFGJtHe86SKpkg.JPEG.angayu%2FIMG%25A3%25DF20220120%25A3%25DF19.jpg&type=a340" class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                    <h5 class="card-title font-bold">${challeng_title}</h5>
+                                                    <input type="hidden" value="${challeng_num}">
+                                                    <p class="card-text">모집기간 : ~${challeng_deadline} <br>
+                                                        러닝기간 : ${challeng_start_date}~${challeng_end_date}
+                                                    </p>
+                                                    <textarea class="challeng_contents" readonly cols="45" rows="5">${challeng_contents}</textarea>
+                                                    <button type="button" class="btn btn-outline-primary mybtns" onclick="challengeJoin(${challeng_num})">신청하기</button>
+                                                </div>
+                                            </div>
+                                        </div>`
+
+                        $('#cards_box').append(temp_html)
+
+                    }
+
+                }
+            })
+        }
+
+        function challengeJoin(challengNum){
+            //러닝 챌린지 신청
+            Swal.fire({
+                title: '해당 챌린지를 신청하시겠습니까?',
+                icon: 'question',
+
+                showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+                confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+                cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+                confirmButtonText: '신청', // confirm 버튼 텍스트 지정
+                cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+
+                reverseButtons: false, // 버튼 순서 거꾸로
+
+            }).then(result => {
+                // 만약 Promise리턴을 받으면,
+                if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
+                    console.log(challengNum);
+
+                    $.ajax({
+                        type: "post",
+                        url: "/api/challengJoin",
+                        data: {'challengNum_give':challengNum},
+                        success: function (response) {
+                            console.log(response)
+                        }
+                    })
+
+                    Swal.fire('신청 되었습니다.');
+                }
+            });
+        }
+
+        function challengRecruit() {
+            //러닝 챌린지 모집 글 작성
+            let img = $('#challeng_img').val()
+            console.log(img)
+
+            let challeng_title = $('#challeng_title').val()
+            console.log(challeng_title)
+
+            let challeng_deadline = $('#challeng_deadline').val()
+            console.log(challeng_deadline)
+
+            let challeng_start_date = $('#challeng_start_date').val()
+            console.log(challeng_start_date)
+
+            let challeng_end_date = $('#challeng_end_date').val()
+            console.log(challeng_end_date)
+
+            let challeng_contents = $('#challeng_contents').val()
+            console.log(challeng_contents)
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/challengRecruit',
+                data: {challeng_title_give:challeng_title, challeng_deadline_give:challeng_deadline, challeng_start_date_give:challeng_start_date,
+                        challeng_end_date_give:challeng_end_date, challeng_contents_give:challeng_contents},
+                success: function (response) {
+                    alert(response['msg'])
+                    window.location.reload()
+                }
+            });
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="mytitle">
+        <div style="margin-left: 1500px; font-size: 16px;">
+            <a href="">Home <i class="fa-solid fa-house"></i></a>&nbsp&nbsp
+            <!--<a href="">Logout <i class="fa-solid fa-right-from-bracket"></i></a>-->
+            <a href="">Login <i class="fa-solid fa-right-to-bracket"></i></a>
+        </div>
+        <div style="width: 300px; text-align: center;">
+            <h1 style="font-size: 400%;">위드런</h1>
+        </div>
+        <br>
+        <h4>함께해요 러닝!</h4>
+        <!-- Button trigger modal -->
+        <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="">모집하기</button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade modal-dialog-scrollable" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title font-bold" id="staticBackdropLabel">러닝 챌린지 모집하기</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-floating mb-3">
+                        <div class="mb-3">
+                            <input class="form-control" type="file" id="challeng_img">
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">제목</span>
+                        <input type="text" class="form-control" id="challeng_title" aria-label="challeng_title" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon2">모집기한</span>
+                        <input type="date" class="form-control" id="challeng_deadline" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon3">러닝기간</span>
+                        <input type="date" class="form-control" placeholder="Username" id="challeng_start_date" aria-label="Username">
+                        <span class="input-group-text">~</span>
+                        <input type="date" class="form-control" placeholder="Server" id="challeng_end_date" aria-label="Server">
+                    </div>
+                    <div class="form-floating">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="challeng_contents" style="height: 250px"></textarea>
+                        <label for="challeng_contents">모집 내용</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="challengRecruit()">등록</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mycards">
+        <div class="row row-cols-1 row-cols-md-3 g-4" id="cards_box">
+
+        </div>
+    </div>
+</body>
+
+</html>
