@@ -124,6 +124,19 @@
         .text-comment::-webkit-scrollbar {
             display: none;
         }
+        .text-line {
+            display: flex;
+            justify-content: space-between;
+        }
+        .text-line > h5 {
+            margin: 0;
+        }
+        .delete-btn {
+            background-color: transparent;
+            border: 1px solid #2c3e70;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
         @media (max-width: 768px) {
             #products-box-shoes, #products-box-diet, #products-box-all {
@@ -138,6 +151,62 @@
             }
         }
     </style>
+    <script>
+        $(document).ready(function () {
+            showList();
+        });
+
+        function showList() {
+            $.ajax({
+                type: "GET",
+                url: "/recommend/post/list",
+                data: {},
+                success: function (response) {
+                    const rows = response.recommends;
+                    for (let row of rows) {
+                        let name = row.name;
+                        let choose = row.choose;
+                        let url = row.url;
+                        let comment = row.comment;
+                        let num = row.num;
+
+                        let txt = `<div class="shoes-box">
+                                            <img src="${url}" alt="diet">
+                                            <div class="text-box">
+                                                <div class="text-line">
+                                                    <h5>😁 ${name}</h5>
+                                                    <button type="button" onclick="recommendDel(${num})" class="delete-btn">삭제</button>
+                                                </div>
+                                                <p class="text-comment">🖊 ${comment}</p>
+                                            </div>
+                                        </div>`;
+
+                        if (choose === 'shoes') {
+                            $("#products-box-shoes").append(txt);
+                            $("#products-box-all").append(txt);
+                        } else if (choose === 'diet') {
+                            $("#products-box-diet").append(txt);
+                            $("#products-box-all").append(txt);
+                        } else {
+                            $("#products-box-all").append(txt);
+                        }
+                    }
+                },
+            });
+        }
+
+        function recommendDel(num) {
+            $.ajax({
+                type: "POST",
+                url: "/recommend/delete",
+                data: {num_give: num},
+                success: function (response) {
+                    alert(response["msg"])
+                    window.location.reload()
+                }
+            });
+        }
+    </script>
 </head>
 <body>
     <nav id="navbar">
@@ -173,44 +242,7 @@
             </div>
         </div>
     </section>
-
     <script>
-        $(document).ready(function () {
-            showList();
-        });
-
-        function showList() {
-            $.ajax({
-                type: "GET",
-                url: "/recommend/post/list",
-                data: {},
-                success: function (response) {
-                    const rows = response.recommends;
-                    for (let row of rows) {
-                        let name = row.name;
-                        let choose = row.choose;
-                        let url = row.url;
-                        let comment = row.comment;
-
-                        let txt = `<div class="shoes-box">
-                                            <img src="${url}" alt="diet">
-                                            <div class="text-box">
-                                                <h5>😁 ${name}</h5>
-                                                <p class="text-comment">🖊 ${comment}</p>
-                                            </div>
-                                        </div>`;
-
-                        if (choose === 'shoes') {
-                            $("#products-box-shoes").append(txt);
-                            $("#products-box-all").append(txt);
-                        } else {
-                            $("#products-box-diet").append(txt);
-                            $("#products-box-all").append(txt);
-                        }
-                    }
-                },
-            });
-        }
 
         const tabs = document.querySelectorAll("[data-tab-target]");
         const tabcon = document.querySelectorAll("[data-tab-content]");
@@ -236,7 +268,6 @@
                 target.classList.add("active");
             });
         });
-
     </script>
 </body>
 </html>

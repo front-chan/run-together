@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, jsonify
 app = Flask(__name__)
 
+import random
+
 from pymongo import MongoClient
 import certifi
 
@@ -28,15 +30,24 @@ def recomment_post():
     url_receive = request.form['url_give']
     comment_receive = request.form['comment_give']
 
+    count = random.randrange(1,100000000)
+
     doc = {
         'name':name_receive,
         'choose':choose_receive,
         'url':url_receive,
-        'comment':comment_receive
+        'comment':comment_receive,
+        'num':count
     }
 
     db.recommend.insert_one(doc)
     return jsonify({'msg': '등록 완료!'})
+
+@app.route("/recommend/delete", methods=["POST"])
+def recommend_del():
+    num_receive = request.form['num_give']
+    db.recommend.delete_one({'num': int(num_receive)})
+    return jsonify({'msg': '삭제 완료!'})
 
 @app.route("/recommend/post/list", methods=["GET"])
 def recommend_list():
