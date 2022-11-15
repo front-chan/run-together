@@ -207,8 +207,24 @@
                 data: {challenge_title_give:challenge_title, challenge_deadline_give:challenge_deadline, challenge_start_date_give:challenge_start_date,
                         challenge_end_date_give:challenge_end_date, challenge_contents_give:challenge_contents},
                 success: function (response) {
-                    alert(response['msg'])
-                    window.location.reload()
+                    /*alert(response['msg'])*/
+
+                    Swal.fire({
+                        title: '챌린지가 등록 되었습니다.',
+                        icon: 'success',
+
+                        showCancelButton: false, // cancel버튼 보이기. 기본은 원래 없음
+                        confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+                        confirmButtonText: '확인', // confirm 버튼 텍스트 지정
+
+                        reverseButtons: true, // 버튼 순서 거꾸로
+
+                    }).then(result => {
+                        if (result.isConfirmed) { // 만약 모달창에서 확인 버튼을 눌렀다면
+                            window.location.reload()
+                        }
+                    });
+
                 }
             });
         }
