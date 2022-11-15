@@ -45,21 +45,3 @@ def recommend_list():
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
-
-
-# @app.route("/bucket/done", methods=["POST"])
-# def bucket_done():
-#     num_receive = request.form['num_give']
-#
-#     db.bucketss.update_one({'num':int(num_receive)}, {'$set': {'done':1}})
-#
-#     return jsonify({'msg': '버킷 완료!'})
-
-# @app.route("/bucket/cancle", methods=["POST"])
-# def bucket_cancle():
-#     num_receive = request.form['num_give']
-#
-#     db.bucketss.update_one({'num':int(num_receive)}, {'$set': {'done':0}})
-#
-#     return jsonify({'msg': '취소 완료!'})
-

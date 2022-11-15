@@ -15,18 +15,15 @@
             margin: 0;
             padding: 0;
             background-color: #f7fcfd;
-          /*  background-image: linear-gradient(*/
-          /*  0deg,*/
-          /*  rgba(0, 0, 0, 0.5),*/
-          /*  rgba(0, 0, 0, 0.5)*/
-          /*),url('https://images.unsplash.com/photo-1596727362302-b8d891c42ab8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTM0fHxydW5uaW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60');*/
-          /*  background-size: cover;*/
-          /*  background-position: center 20%;*/
+        }
+        body::-webkit-scrollbar {
+            display: none;
         }
         #navbar {
-            background-color: #1f44a8;
-            height: 180px;
-            /*border-bottom: 1px solid #1f44a8;*/
+            /*background-color: #1f44a8;*/
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1552674605-db6ffd4facb5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cnVubmluZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60');
+            background-position: center 15%;
+            height: 230px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -46,6 +43,16 @@
             font-size: 30px;
             margin-left: 10px;
         }
+        .items {
+            max-width: 1200px;
+            width: 95%;
+            display: none;
+            padding: 10px;
+            position: relative;
+        }
+        .items.active {
+            display: inline-block;
+        }
         .category-btns {
             display: flex;
             justify-content: space-between;
@@ -56,7 +63,7 @@
             display: flex;
             margin: 10px 0;
         }
-        .box-btn > button {
+        .tests {
             font-size: 15px;
             width: 100px;
             padding: 5px 10px;
@@ -67,9 +74,13 @@
             transition: background-color .25s ease-in-out;
             cursor: pointer;
         }
-        .box-btn > button:hover {
+        .tests:hover {
             background-color: #a7e2f6;
         }
+        .tests.actives {
+            background-color: #a7e2f6;
+        }
+
         .post-link {
             margin-right: 150px;
             text-decoration: none;
@@ -79,9 +90,8 @@
         .post-link:hover {
             text-decoration: underline;
         }
-        #products-box-shoes, #products-box-diet {
+        #products-box-shoes, #products-box-diet, #products-box-all {
             display: flex;
-            /*display: none;*/
             flex-wrap: wrap;
             justify-content: flex-start;
         }
@@ -90,7 +100,6 @@
             max-width: 250px;
             height: 380px;
             width: 95%;
-            /*border: 0.2px solid #bfebfa;*/
             box-shadow: 0px 0px 6px 0px #bfebfa;
             border-radius: 10px;
             margin: 10px;
@@ -108,13 +117,16 @@
         .text-box > h5 {
             margin-top: 0px;
         }
-        .text-box > p {
+        .text-comment {
             max-height: 140px;
             overflow: scroll;
         }
+        .text-comment::-webkit-scrollbar {
+            display: none;
+        }
 
         @media (max-width: 768px) {
-            #products-box-shoes, #products-box-diet {
+            #products-box-shoes, #products-box-diet, #products-box-all {
                 justify-content: center;
             }
             .category-btns {
@@ -133,144 +145,97 @@
     </nav>
     <section id="recommend-box">
         <h1>💁용품 추천</h1>
-        <div class="category-btns">
-            <div class="box-btn">
-                <button class="all-btn">All🔍</button>
-                <button class="shoes-btn">러닝화👟</button>
-                <button class="diet-btn">다이어트🍗</button>
-            </div>
-            <a class="post-link" href="/recommend/post">추천하기</a>
-        </div>
-        <div id="products-box-shoes">
-            <div class="shoes-box">
-                <img src="https://images.unsplash.com/photo-1558109195-c668bcf42e93?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTMwfHxydW5uaW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="run">
-                <div class="text-box">
-                    <h5>😁 닉네임 name</h5>
-                    <p>🖊 추천이유 추천이유 추천이유 추천이유 추천이유 추천이유 추천이유 추천이유 추천이유 Lorem ipsum 추천이유추천이유추천이유추천이유dolor sit amet, consectetur adipisicing elit. Molestiae, obcaecati, ratione. Ab animi architecto autem dignissimos est ex fugiat laborum officia quidem quod quos saepe, similique sit velit, voluptate. Facere!</p>
+        <div class="tabs">
+            <div class="category-btns">
+                <div class="box-btn">
+                    <div class="tab btns" data-tab-target="#tab1" data-tab-btn="#btn1">
+                        <button id="btn1" data-conbtn class="tests actives">All🔍</button>
+                    </div>
+                    <div class="tab btns" data-tab-target="#tab2" data-tab-btn="#btn2">
+                        <button id="btn2" data-conbtn class="tests">러닝화👟</button>
+                    </div>
+                    <div class="tab btns" data-tab-target="#tab3" data-tab-btn="#btn3">
+                        <button id="btn3" data-conbtn class="tests">다이어트🍗</button>
+                    </div>
                 </div>
-            </div>
-            <div class="shoes-box">
-                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8cnVubmluZyUyMHNob2VzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="run">
-                <div class="text-box">
-                    <h5>😁 닉네임 name</h5>
-                    <p>🖊 추천이유 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, obcaecati, ratione. Ab animi architecto autem dignissimos est ex fugiat laborum officia quidem quod quos saepe, similique sit velit, voluptate. Facere!</p>
-                </div>
-            </div>
-            <div class="shoes-box">
-                <img src="https://images.unsplash.com/photo-1469395446868-fb6a048d5ca3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8cnVubmluZyUyMHNob2VzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="run">
-                <div class="text-box">
-                    <h5>😁 닉네임 name</h5>
-                    <p>🖊 추천이유 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, obcaecati, ratione. Ab animi architecto autem dignissimos est ex fugiat laborum officia quidem quod quos saepe, similique sit velit, voluptate. Facere!</p>
-                </div>
-            </div>
-            <div class="shoes-box">
-                <img src="https://images.unsplash.com/photo-1611080027147-a1a0b6e05168?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fHJ1bm5pbmclMjBzaG9lc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="run">
-                <div class="text-box">
-                    <h5>😁 닉네임 name</h5>
-                    <p>🖊 추천이유 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, obcaecati, ratione. Ab animi architecto autem dignissimos est ex fugiat laborum officia quidem quod quos saepe, similique sit velit, voluptate. Facere!</p>
-                </div>
-            </div>
-            <div class="shoes-box">
-                <img src="https://images.unsplash.com/photo-1548801133-da353ebb1d97?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzN8fHJ1bm5pbmclMjBzaG9lc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="run">
-                <div class="text-box">
-                    <h5>😁 닉네임 name</h5>
-                    <p>🖊 추천이유 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, obcaecati, ratione. Ab animi architecto autem dignissimos est ex fugiat laborum officia quidem quod quos saepe, similique sit velit, voluptate. Facere!</p>
-                </div>
-            </div>
-            <div class="shoes-box">
-                <img src="https://images.unsplash.com/photo-1612902377653-b0d4cfce3deb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDd8fHJ1bm5pbmclMjBzaG9lc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="run">
-                <div class="text-box">
-                    <h5>😁 닉네임 name</h5>
-                    <p>🖊 추천이유 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, obcaecati, ratione. Ab animi architecto autem dignissimos est ex fugiat laborum officia quidem quod quos saepe, similique sit velit, voluptate. Facere!</p>
-                </div>
-            </div>
-            <div class="shoes-box">
-                <img src="https://images.unsplash.com/photo-1520256862855-398228c41684?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTZ8fHJ1bm5pbmclMjBzaG9lc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="run">
-                <div class="text-box">
-                    <h5>😁 닉네임 name</h5>
-                    <p>🖊 추천이유 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, obcaecati, ratione. Ab animi architecto autem dignissimos est ex fugiat laborum officia quidem quod quos saepe, similique sit velit, voluptate. Facere!</p>
-                </div>
+                <a class="post-link" href="/recommend/post">추천하기</a>
             </div>
         </div>
-        <div id="products-box-diet">
-            <div class="shoes-box">
-                <img src="https://images.unsplash.com/photo-1611077544218-c93992b06e92?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZGlldCUyMGRydWd8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60" alt="diet">
-                <div class="text-box">
-                    <h5>😁 닉네임 name</h5>
-                    <p>🖊 추천이유 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, obcaecati, ratione. Ab animi architecto autem dignissimos est ex fugiat laborum officia quidem quod quos saepe, similique sit velit, voluptate. Facere!</p>
-                </div>
+        <div class="content">
+            <div id="tab1" data-tab-content class="items active">
+                <div id="products-box-all"></div>
             </div>
-            <div class="shoes-box">
-                <img src="https://images.unsplash.com/photo-1505714197102-6ae95091ed70?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjh8fGRpZXQlMjBkcnVnfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="diet">
-                <div class="text-box">
-                    <h5>😁 닉네임 name</h5>
-                    <p>🖊 추천이유 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, obcaecati, ratione. Ab animi architecto autem dignissimos est ex fugiat laborum officia quidem quod quos saepe, similique sit velit, voluptate. Facere!</p>
-                </div>
+            <div id="tab2" data-tab-content class="items">
+                <div id="products-box-shoes"></div>
             </div>
-            <div class="shoes-box">
-                <img src="https://images.unsplash.com/photo-1508170754725-6e9a5cfbcabf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDR8fGRpZXQlMjBkcnVnfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="diet">
-                <div class="text-box">
-                    <h5>😁 닉네임 name</h5>
-                    <p>🖊 추천이유 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, obcaecati, ratione. Ab animi architecto autem dignissimos est ex fugiat laborum officia quidem quod quos saepe, similique sit velit, voluptate. Facere!</p>
-                </div>
+            <div id="tab3" data-tab-content class="items">
+                <div id="products-box-diet"></div>
             </div>
         </div>
     </section>
 
-     <script>
-         $(document).ready(function () {
-             showList();
-         });
+    <script>
+        $(document).ready(function () {
+            showList();
+        });
 
-         function showList() {
-             $.ajax({
-                 type: "GET",
-                 url: "/recommend/post/list",
-                 data: {},
-                 success: function (response) {
-                     const rows = response.recommends;
-                     for (let row of rows) {
-                         let name = row.name;
-                         let choose = row.choose;
-                         let url = row.url;
-                         let comment = row.comment;
+        function showList() {
+            $.ajax({
+                type: "GET",
+                url: "/recommend/post/list",
+                data: {},
+                success: function (response) {
+                    const rows = response.recommends;
+                    for (let row of rows) {
+                        let name = row.name;
+                        let choose = row.choose;
+                        let url = row.url;
+                        let comment = row.comment;
 
-                         let txt = `<div class="shoes-box">
-                                        <img src="${url}" alt="diet">
-                                        <div class="text-box">
-                                            <h5>😁 ${name}</h5>
-                                            <p>🖊 ${comment}</p>
-                                        </div>
-                                    </div>`;
+                        let txt = `<div class="shoes-box">
+                                            <img src="${url}" alt="diet">
+                                            <div class="text-box">
+                                                <h5>😁 ${name}</h5>
+                                                <p class="text-comment">🖊 ${comment}</p>
+                                            </div>
+                                        </div>`;
 
-                         if (choose === 'shoes') {
-                             $("#products-box-shoes").append(txt);
-                         } else {
-                             $("#products-box-diet").append(txt);
-                         }
-                     }
-                 },
-             });
-         }
+                        if (choose === 'shoes') {
+                            $("#products-box-shoes").append(txt);
+                            $("#products-box-all").append(txt);
+                        } else {
+                            $("#products-box-diet").append(txt);
+                            $("#products-box-all").append(txt);
+                        }
+                    }
+                },
+            });
+        }
 
-        const allBtn = document.querySelector('.all-btn')
-        const shoesBtn = document.querySelector('.shoes-btn')
-        const dietBtn = document.querySelector('.diet-btn')
-        const productsBoxShoes = document.getElementById('products-box-shoes')
-        const productsBoxDiet = document.getElementById('products-box-diet')
+        const tabs = document.querySelectorAll("[data-tab-target]");
+        const tabcon = document.querySelectorAll("[data-tab-content]");
+        const btns = document.querySelectorAll('[data-tab-btn]');
+        const conBtn = document.querySelectorAll('[data-conbtn]')
 
-        allBtn.addEventListener('click', () => {
-            productsBoxShoes.style.display = 'flex'
-            productsBoxDiet.style.display = 'flex'
-        })
-        shoesBtn.addEventListener('click', () => {
-            productsBoxShoes.style.display = 'flex'
-            productsBoxDiet.style.display = 'none'
-        })
-        dietBtn.addEventListener('click', () => {
-            productsBoxShoes.style.display = 'none'
-            productsBoxDiet.style.display = 'flex'
-        })
+        btns.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const activeBtn = document.querySelector(btn.dataset.tabBtn);
+                conBtn.forEach((btnAll) => {
+                    btnAll.classList.remove("actives");
+                });
+                activeBtn.classList.add("actives");
+            });
+        });
+
+        tabs.forEach((tab) => {
+            tab.addEventListener("click", () => {
+                const target = document.querySelector(tab.dataset.tabTarget);
+                tabcon.forEach((tabAll) => {
+                    tabAll.classList.remove("active");
+                });
+                target.classList.add("active");
+            });
+        });
 
     </script>
 </body>
