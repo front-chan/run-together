@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="85ba518d-9fb4-421d-b635-1159e0abc4aa" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/recommend.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/recommend.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/review.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/review.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +82,7 @@
       <workItem from="1668432241229" duration="8863000" />
       <workItem from="1668470402941" duration="20949000" />
       <workItem from="1668501796521" duration="1962000" />
-      <workItem from="1668507144300" duration="7565000" />
+      <workItem from="1668507144300" duration="7990000" />
     </task>
     <servers />
   </component>
