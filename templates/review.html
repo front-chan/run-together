@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🏃‍♀‍위드런🏃‍♂ || 함께 달려요!</title>
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
         * {
             font-family: 'Gowun Dodum', sans-serif;
@@ -13,6 +14,7 @@
         body {
             margin: 0;
             padding: 0;
+            background-color: #f7fcfd;
           /*  background-image: linear-gradient(*/
           /*  0deg,*/
           /*  rgba(0, 0, 0, 0.5),*/
@@ -92,15 +94,14 @@
             width: 95%;
             margin-right: 40px;
         }
-        .input-box > input {
+        .input-box > input, .input-box > select {
             max-width: 460px;
-            margin: 10px 10px 10px 20px;
+            margin: 3px 10px 10px 20px;
             height: 30px;
             border-radius: 10px;
             border: 0;
             font-size: 15px;
-            box-shadow: 1px 1px 6px 0px #a7e2f6;
-            background-color: #d7f4fd;
+            background-color: #dbe5ea;
         }
         .input-box > label {
             margin: 10px 0 0 10px;
@@ -108,18 +109,17 @@
         }
         .input-box > textarea {
             max-width: 500px;
-            margin: 20px 20px 30px 20px;
+            margin: 3px 20px 30px 20px;
             border-radius: 10px;
             border: 0;
             font-size: 15px;
-            box-shadow: 1px 1px 6px 0px #a7e2f6;
-            background-color: #d7f4fd;
+            background-color: #dbe5ea;
         }
         .review-img {
             border-radius: 10px;
             max-width: 500px;
             margin-top: 30px;
-            opacity: 75%;
+            opacity: 80%;
         }
         .recommend-btn {
             width: 100px;
@@ -148,8 +148,25 @@
                 flex-direction: column-reverse;
            }
         }
-
     </style>
+    <script>
+        function saveRecommend() {
+            let name = $("#name").val();
+            let choose = $('#choose').val();
+            let url = $('#url').val();
+            let comment = $('#comment').val();
+
+            $.ajax({
+                type: "POST",
+                url: "/recommend/post/list",
+                data: {name_give: name, choose_give: choose, url_give:url, comment_give: comment},
+                success: function (response) {
+                    alert(response["msg"]);
+                    window.location.href = "http://localhost:5000/recommend";
+                },
+            });
+        }
+    </script>
 </head>
 <body>
     <nav id="navbar">
@@ -159,27 +176,33 @@
         <h1>💁용품 추천</h1>
         <div class="category-btns">
             <div class="box-btn">
-                <button class="all-btn">All🔍</button>
-                <button class="shoes-btn">러닝화👟</button>
-                <button class="diet-btn">보조제🔋</button>
+                <button class="all-btn" disabled>All🔍</button>
+                <button class="shoes-btn" disabled>러닝화👟</button>
+                <button class="diet-btn" disabled>보조제🔋</button>
             </div>
             <a class="post-link" href="/recommend">뒤로가기</a>
         </div>
         <div id="review-box">
             <div class="input-box">
-                <label for="name">닉네임</label>
-                <input type="text" id="name" placeholder="name">
-                <label for="url">이미지 URL</label>
-                <input type="text" id="url" placeholder="image URL">
-                <label for="comment">추천 이유</label>
-                <textarea name="comment" id="comment" cols="35" rows="7" placeholder="comment"></textarea>
-                <button type="type" class="recommend-btn">추천하기</button>
+<!--                <form action="">-->
+                <label for="name">😁 닉네임</label>
+                <input type="text" id="name" name="name" placeholder="name">
+                <label for="choose">💁‍♀️ 카테고리</label>
+                <select name="choose" id="choose">
+                    <option value="choice">카테고리를 선택해주세요</option>
+                    <option value="shoes">러닝화👟</option>
+                    <option value="diet">다이어트🍗</option>
+                </select>
+                <label for="url">🌅 이미지 URL</label>
+                <input type="text" id="url" name="url" placeholder="image URL">
+                <label for="comment">🖊 추천 이유</label>
+                <textarea name="comment" id="comment" cols="35" rows="5" placeholder="comment"></textarea>
+                <button type="submit" class="recommend-btn" onclick="saveRecommend()">추천하기</button>
+            <!--</form>-->
             </div>
             <img class="review-img" src="https://media.istockphoto.com/id/1366052585/photo/shot-of-a-group-of-friends-hanging-out-before-working-out-together.jpg?b=1&s=170667a&w=0&k=20&c=z5JTIJ3k0QgJCEMPpJQ_JvnGzN_izKQgJRB5YKHgFV0="
                  alt="">
-
         </div>
-
     </section>
 </body>
 </html>
