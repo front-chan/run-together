@@ -10,24 +10,24 @@ def home():
     return render_template('index.html')
 
 @app.route("/api/challengeRecruit", methods=["POST"])
-def challeng_recruit_post():
-    title_receive = request.form['challeng_title_give']
-    deadline_receive = request.form['challeng_deadline_give']
-    start_date_receive = request.form['challeng_start_date_give']
-    end_date_receive = request.form['challeng_end_date_give']
-    contents_receive = request.form['challeng_contents_give']
+def challenge_recruit_post():
+    title_receive = request.form['challenge_title_give']
+    deadline_receive = request.form['challenge_deadline_give']
+    start_date_receive = request.form['challenge_start_date_give']
+    end_date_receive = request.form['challenge_end_date_give']
+    contents_receive = request.form['challenge_contents_give']
 
-    challeng_list = list(db.withrun.find({},{'_id':False}))
+    challenge_list = list(db.withrun.find({},{'_id':False}))
 
-    challeng_num = len(challeng_list) + 1
+    challenge_num = len(challenge_list) + 1
 
     doc = {
-        'challeng_num' : challeng_num,
-        'challeng_title': title_receive,
-        'challeng_deadline': deadline_receive,
-        'challeng_start_date': start_date_receive,
-        'challeng_end_date': end_date_receive,
-        'challeng_contents': contents_receive
+        'challenge_num': challenge_num,
+        'challenge_title': title_receive,
+        'challenge_deadline': deadline_receive,
+        'challenge_start_date': start_date_receive,
+        'challenge_end_date': end_date_receive,
+        'challenge_contents': contents_receive
     }
 
     db.withrun.insert_one(doc)
@@ -35,14 +35,14 @@ def challeng_recruit_post():
     return jsonify({'msg': '챌린지가 등록 되었습니다.'})
 
 @app.route("/api/challengeList", methods=["GET"])
-def challeng_list_get():
-    challeng_list = list(db.withrun.find({}, {'_id': False}))
+def challenge_list_get():
+    challenge_list = list(db.withrun.find({}, {'_id': False}))
 
-    return jsonify({'challeng': challeng_list})
+    return jsonify({'challenge': challenge_list})
 
 @app.route("/api/challengeJoin", methods=["POST"])
-def challeng_join_post():
-    challengNum_receive = request.form['challengNum_give']
+def challenge_join_post():
+    challenge_num_receive = request.form['challengeNum_give']
 
     return jsonify({'msg': '챌린지 신청 완료'})
 

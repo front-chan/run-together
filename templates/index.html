@@ -61,10 +61,6 @@
             border: 2px solid white;
         }
 
-        .mycomment {
-            color: gray;
-        }
-
         .mycards {
             margin: 20px auto 20px auto;
             width: 95%;
@@ -74,19 +70,6 @@
         .font-bold {
             font-weight: bold;
 
-        }
-
-        .mypost {
-            width: 95%;
-            max-width: 500px;
-
-            height: 500px;
-
-            margin: 20px auto 0px auto;
-            padding: 20px;
-            box-shadow: 0px 0px 3px 0px gray;
-
-            /*display: none;*/
         }
 
         .mybtns {
@@ -110,12 +93,12 @@
             resize: none;
         }
 
-        .challeng_contents {
+        .challenge_contents {
             border: none;
 
         }
 
-        .challeng_contents:focus {
+        .challenge_contents:focus {
             outline: none;
         }
 
@@ -131,28 +114,28 @@
                 url: '/api/challengeList',
                 data: {},
                 success: function (response) {
-                    console.log(response['challeng'])
+                    console.log(response['challenge'])
 
-                    let rows = response['challeng']
+                    let rows = response['challenge']
                     for (let i = 0; i < rows.length; i++){
-                        let challeng_num = rows[i]['challeng_num']
-                        let challeng_title = rows[i]['challeng_title']
-                        let challeng_deadline = rows[i]['challeng_deadline']
-                        let challeng_start_date = rows[i]['challeng_start_date']
-                        let challeng_end_date = rows[i]['challeng_end_date']
-                        let challeng_contents = rows[i]['challeng_contents']
+                        let challenge_num = rows[i]['challenge_num']
+                        let challenge_title = rows[i]['challenge_title']
+                        let challenge_deadline = rows[i]['challenge_deadline']
+                        let challenge_start_date = rows[i]['challenge_start_date']
+                        let challenge_end_date = rows[i]['challenge_end_date']
+                        let challenge_contents = rows[i]['challenge_contents']
 
                         let temp_html = `<div class="col">
                                             <div class="card h-100">
                                                 <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjAxMjBfOTQg%2FMDAxNjQyNjU1NDE3MjUy.MRNWjEO1S-P0MWyY_C9iRwQL0QnnuqD1i5TC2KGpMLsg.ErbHNyL9VF9GwRXQOmqkqqrnRhurCLTFGJtHe86SKpkg.JPEG.angayu%2FIMG%25A3%25DF20220120%25A3%25DF19.jpg&type=a340" class="card-img-top" alt="...">
                                                 <div class="card-body">
-                                                    <h5 class="card-title font-bold">${challeng_title}</h5>
-                                                    <input type="hidden" value="${challeng_num}">
-                                                    <p class="card-text">모집기간 : ~${challeng_deadline} <br>
-                                                        러닝기간 : ${challeng_start_date}~${challeng_end_date}
+                                                    <h5 class="card-title font-bold">${challenge_title}</h5>
+                                                    <input type="hidden" value="${challenge_num}">
+                                                    <p class="card-text">모집기간 : ~${challenge_deadline} <br>
+                                                        러닝기간 : ${challenge_start_date}~${challenge_end_date}
                                                     </p>
-                                                    <textarea class="challeng_contents" readonly cols="45" rows="5">${challeng_contents}</textarea>
-                                                    <button type="button" class="btn btn-outline-primary mybtns" onclick="challengeJoin(${challeng_num})">신청하기</button>
+                                                    <textarea class="challenge_contents" readonly cols="45" rows="5">${challenge_contents}</textarea>
+                                                    <button type="button" class="btn btn-outline-primary mybtns" onclick="challengeJoin(${challenge_num})">신청하기</button>
                                                 </div>
                                             </div>
                                         </div>`
@@ -165,7 +148,7 @@
             })
         }
 
-        function challengeJoin(challengNum){
+        function challengeJoin(challengeNum){
             //러닝 챌린지 신청
             Swal.fire({
                 title: '해당 챌린지를 신청하시겠습니까?',
@@ -182,12 +165,12 @@
             }).then(result => {
                 // 만약 Promise리턴을 받으면,
                 if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
-                    console.log(challengNum);
+                    console.log(challengeNum);
 
                     $.ajax({
                         type: "post",
                         url: "/api/challengeJoin",
-                        data: {'challengNum_give':challengNum},
+                        data: {'challengeNum_give':challengeNum},
                         success: function (response) {
                             console.log(response)
                         }
@@ -200,29 +183,29 @@
 
         function challengeRecruit() {
             //러닝 챌린지 모집 글 작성
-            let img = $('#challeng_img').val()
+            let img = $('#challenge_img').val()
             console.log(img)
 
-            let challeng_title = $('#challeng_title').val()
-            console.log(challeng_title)
+            let challenge_title = $('#challenge_title').val()
+            console.log(challenge_title)
 
-            let challeng_deadline = $('#challeng_deadline').val()
-            console.log(challeng_deadline)
+            let challenge_deadline = $('#challenge_deadline').val()
+            console.log(challenge_deadline)
 
-            let challeng_start_date = $('#challeng_start_date').val()
-            console.log(challeng_start_date)
+            let challenge_start_date = $('#challenge_start_date').val()
+            console.log(challenge_start_date)
 
-            let challeng_end_date = $('#challeng_end_date').val()
-            console.log(challeng_end_date)
+            let challenge_end_date = $('#challenge_end_date').val()
+            console.log(challenge_end_date)
 
-            let challeng_contents = $('#challeng_contents').val()
-            console.log(challeng_contents)
+            let challenge_contents = $('#challenge_contents').val()
+            console.log(challenge_contents)
 
             $.ajax({
                 type: 'POST',
                 url: '/api/challengeRecruit',
-                data: {challeng_title_give:challeng_title, challeng_deadline_give:challeng_deadline, challeng_start_date_give:challeng_start_date,
-                        challeng_end_date_give:challeng_end_date, challeng_contents_give:challeng_contents},
+                data: {challenge_title_give:challenge_title, challenge_deadline_give:challenge_deadline, challenge_start_date_give:challenge_start_date,
+                        challenge_end_date_give:challenge_end_date, challenge_contents_give:challenge_contents},
                 success: function (response) {
                     alert(response['msg'])
                     window.location.reload()
@@ -261,26 +244,26 @@
                 <div class="modal-body">
                     <div class="form-floating mb-3">
                         <div class="mb-3">
-                            <input class="form-control" type="file" id="challeng_img">
+                            <input class="form-control" type="file" id="challenge_img">
                         </div>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text">제목</span>
-                        <input type="text" class="form-control" id="challeng_title" aria-label="challeng_title" aria-describedby="basic-addon1">
+                        <input type="text" class="form-control" id="challenge_title" aria-label="challenge_title" aria-describedby="basic-addon1">
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon2">모집기한</span>
-                        <input type="date" class="form-control" id="challeng_deadline" aria-describedby="basic-addon1">
+                        <input type="date" class="form-control" id="challenge_deadline" aria-describedby="basic-addon1">
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon3">러닝기간</span>
-                        <input type="date" class="form-control" placeholder="Username" id="challeng_start_date" aria-label="Username">
+                        <input type="date" class="form-control" placeholder="Username" id="challenge_start_date" aria-label="Username">
                         <span class="input-group-text">~</span>
-                        <input type="date" class="form-control" placeholder="Server" id="challeng_end_date" aria-label="Server">
+                        <input type="date" class="form-control" placeholder="Server" id="challenge_end_date" aria-label="Server">
                     </div>
                     <div class="form-floating">
-                        <textarea class="form-control" placeholder="Leave a comment here" id="challeng_contents" style="height: 250px"></textarea>
-                        <label for="challeng_contents">모집 내용</label>
+                        <textarea class="form-control" placeholder="Leave a comment here" id="challenge_contents" style="height: 250px"></textarea>
+                        <label for="challenge_contents">모집 내용</label>
                     </div>
                 </div>
                 <div class="modal-footer">
