@@ -9,7 +9,7 @@ db = client.dbsparta
 def home():
     return render_template('index.html')
 
-@app.route("/api/challengRecruit", methods=["POST"])
+@app.route("/api/challengeRecruit", methods=["POST"])
 def challeng_recruit_post():
     title_receive = request.form['challeng_title_give']
     deadline_receive = request.form['challeng_deadline_give']
@@ -32,7 +32,7 @@ def challeng_recruit_post():
 
     db.withrun.insert_one(doc)
 
-    return jsonify({'msg': '챌린지가 등록 되었습니다kk.'})
+    return jsonify({'msg': '챌린지가 등록 되었습니다.'})
 
 @app.route("/api/challengeList", methods=["GET"])
 def challeng_list_get():
@@ -40,7 +40,7 @@ def challeng_list_get():
 
     return jsonify({'challeng': challeng_list})
 
-@app.route("/api/challengJoin", methods=["POST"])
+@app.route("/api/challengeJoin", methods=["POST"])
 def challeng_join_post():
     challengNum_receive = request.form['challengNum_give']
 

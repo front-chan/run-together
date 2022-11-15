@@ -186,7 +186,7 @@
 
                     $.ajax({
                         type: "post",
-                        url: "/api/challengJoin",
+                        url: "/api/challengeJoin",
                         data: {'challengNum_give':challengNum},
                         success: function (response) {
                             console.log(response)
@@ -198,7 +198,7 @@
             });
         }
 
-        function challengRecruit() {
+        function challengeRecruit() {
             //러닝 챌린지 모집 글 작성
             let img = $('#challeng_img').val()
             console.log(img)
@@ -220,7 +220,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/api/challengRecruit',
+                url: '/api/challengeRecruit',
                 data: {challeng_title_give:challeng_title, challeng_deadline_give:challeng_deadline, challeng_start_date_give:challeng_start_date,
                         challeng_end_date_give:challeng_end_date, challeng_contents_give:challeng_contents},
                 success: function (response) {
@@ -284,7 +284,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="challengRecruit()">등록</button>
+                    <button type="button" class="btn btn-primary" onclick="challengeRecruit()">등록</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
                 </div>
             </div>
