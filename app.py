@@ -8,7 +8,7 @@ ca = certifi.where()
 client = MongoClient('mongodb+srv://rgngr:rgngr@cluster0.apj6ogn.mongodb.net/cluster0?retryWrites=true&w=majority', tlsCAFile=ca)
 db = client.hanghae99_08
 
-@app.route('/')
+@app.route('/challenge')
 def home():
     return render_template('challenge.html')
 
