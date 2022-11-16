@@ -72,13 +72,29 @@
 
         }
 
-        .mybtns {
+        .tests {
+            font-size: 15px;
+            width: 100px;
+            padding: 5px 10px;
+            border: 1px solid #d7f4fd;
+            border-radius: 5px;
+            margin-left: 10px;
+            background-color: transparent;
+            transition: background-color .25s ease-in-out;
+            cursor: pointer;
+            float: right;
+        }
+        .tests:hover {
+            background-color: #a7e2f6;
+        }
+
+        /*.mybtns {
             float: right;
         }
 
         .mybtns > button {
             margin-right: 10px;
-        }
+        }*/
 
         .deco_none {
             text-decoration: none;
@@ -136,7 +152,7 @@
                                                         러닝기간 : ${challenge_start_date}~${challenge_end_date}
                                                     </p>
                                                     <textarea class="challenge_contents" readonly cols="45" rows="5">${challenge_contents}</textarea>
-                                                    <button type="button" class="btn btn-outline-primary mybtns" onclick="challengeJoin(${challenge_num})">신청하기</button>
+                                                    <button type="button" class="tests" onclick="challengeJoin(${challenge_num})">신청하기</button>
                                                 </div>
                                             </div>
                                         </div>`
