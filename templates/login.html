@@ -142,9 +142,9 @@
 </style>
 
 <script>
-    {% if msg %}
+    /*{% if msg %}
     alert("{{ msg }}")
-    {% endif %}
+    {% endif %}*/
     // ['쿠키'라는 개념에 대해 알아봅시다]
     // 로그인을 구현하면, 반드시 쿠키라는 개념을 사용합니다.
     // 페이지에 관계없이 브라우저에 임시로 저장되는 정보입니다. 키:밸류 형태(딕셔너리 형태)로 저장됩니다.
@@ -160,6 +160,7 @@
                 // 로그인이 정상적으로 되면, 토큰을 받아옵니다.
                 // 이 토큰을 mytoken이라는 키 값으로 쿠키에 저장합니다.
                 $.cookie('mytoken', response['token']);
+                console.log(response)
 
                 Swal.fire({
                         title: '로그인 성공!',
@@ -173,7 +174,7 @@
 
                     }).then(result => {
                         if (result.isConfirmed) { // 만약 모달창에서 확인 버튼을 눌렀다면
-                            window.location.href = '/index'
+                            window.location.href = 'http://localhost:5000/course'
                         }
                     });
 
@@ -207,7 +208,7 @@
             <h1>로그인</h1>
             <div class="signin__card">
                 <h2>
-                    <strong>With-Run</strong>
+                    <strong>런-투게더</strong>
                 </h2>
                 <div>
                     <input type="text" id="userid" aria-describedby="emailHelp" placeholder="아이디를 입력하세요."/>
