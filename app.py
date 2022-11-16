@@ -1,16 +1,5 @@
-from flask import Flask, render_template, request, jsonify
-app = Flask(__name__)
-
-from pymongo import MongoClient
-import certifi
-
-ca = certifi.where()
-
-client = MongoClient('mongodb+srv://rgngr:rgngr@cluster0.apj6ogn.mongodb.net/cluster0?retryWrites=true&w=majority', tlsCAFile=ca)
-db = client.hanghae99_08
-
 @app.route('/course')
-def home():
+def course_home():
     return render_template('course.html')
 
 @app.route("/course/post", methods=["POST"])
