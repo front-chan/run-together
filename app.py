@@ -6,7 +6,7 @@ import certifi
 
 ca = certifi.where()
 
-client = MongoClient('mongodb+srv://rgngr:rgngr@cluster0.apj6ogn.mongodb.net/cluster0?retryWrites=true&w=majority')
+client = MongoClient('mongodb+srv://rgngr:rgngr@cluster0.apj6ogn.mongodb.net/cluster0?retryWrites=true&w=majority', tlsCAFile=ca)
 db = client.dbsparta
 
 @app.route('/')
@@ -29,7 +29,7 @@ def post():
     return jsonify({'msg':'저장 완료!'})
 
 @app.route("/list", methods=["GET"])
-def list():
+def show():
     course_list = list(db.course.find({}, {'_id': False}))
     return jsonify({'courses':course_list})
 
