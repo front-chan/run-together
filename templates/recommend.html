@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🏃‍♀‍위드런🏃‍♂ || 함께 달려요!</title>
+    <title>🏃‍♀‍Run-Together🏃‍♂ || 함께 달려요!</title>
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/4c0dfea791.js" crossorigin="anonymous"></script>
     <style>
         * {
             font-family: 'Gowun Dodum', sans-serif;
@@ -14,25 +15,32 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: #f7fcfd;
         }
         body::-webkit-scrollbar {
             display: none;
         }
-        #navbar {
-            /*background-color: #1f44a8;*/
-            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1552674605-db6ffd4facb5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cnVubmluZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60');
-            background-position: center 15%;
-            height: 230px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .logo-link {
-            font-size: 80px;
+        .mytitle {
+            width: 100%;
+            height: 350px;
+
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1547483238-f400e65ccd56?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80');
+            background-position: 50% 70%;
+            background-size: cover;
+
             color: white;
+            background-color: black;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .deco_none {
             text-decoration: none;
-            font-weight: bold;
+            color: white;
+        }
+        .deco_none:hover{
+            color: white;
         }
         #recommend-box {
             margin: 10px auto;
@@ -101,7 +109,7 @@
             max-width: 250px;
             height: 380px;
             width: 95%;
-            box-shadow: 0px 0px 6px 0px #bfebfa;
+            box-shadow: 0px 0px 2px 0px gray;
             border-radius: 10px;
             margin: 10px;
             overflow: hidden;
@@ -137,6 +145,11 @@
             border: 1px solid #2c3e70;
             border-radius: 5px;
             cursor: pointer;
+            transition: background-color .25s ease-in-out;
+        }
+        .delete-btn:hover {
+            background-color: #475375;
+            color: white;
         }
 
         @media (max-width: 768px) {
@@ -175,10 +188,10 @@
                                             <img src="${url}" alt="diet">
                                             <div class="text-box">
                                                 <div class="text-line">
-                                                    <h5>😁 ${name}</h5>
+                                                    <h5>${name}</h5>
                                                     <button type="button" onclick="recommendDel(${num})" class="delete-btn">삭제</button>
                                                 </div>
-                                                <p class="text-comment">🖊 ${comment}</p>
+                                                <p class="text-comment"> ${comment}</p>
                                             </div>
                                         </div>`;
 
@@ -210,22 +223,29 @@
     </script>
 </head>
 <body>
-    <nav id="navbar">
-        <a class="logo-link" href="index.html">🏃‍♀‍위드런🏃‍♂ </a>
-    </nav>
+    <div class="mytitle">
+        <div style="margin-left: 1500px; font-size: 16px;">
+            <a href="" class="deco_none">Home <i class="fa-solid fa-house"></i></a>&nbsp&nbsp
+            <a href="" class="deco_none">Logout <i class="fa-solid fa-right-from-bracket"></i></a>
+        </div>
+        <div style="width: 500px; text-align: center;">
+            <h1 style="font-size: 400%;">런-투게더</h1>
+        </div>
+        <br>
+        <h4>용품 추천</h4>
+    </div>
     <section id="recommend-box">
-        <h1>💁용품 추천</h1>
         <div class="tabs">
             <div class="category-btns">
                 <div class="box-btn">
                     <div class="tab btns" data-tab-target="#tab1" data-tab-btn="#btn1">
-                        <button id="btn1" data-conbtn class="tests actives">All🔍</button>
+                        <button id="btn1" data-conbtn class="tests actives">All</button>
                     </div>
                     <div class="tab btns" data-tab-target="#tab2" data-tab-btn="#btn2">
-                        <button id="btn2" data-conbtn class="tests">러닝화👟</button>
+                        <button id="btn2" data-conbtn class="tests">러닝화</button>
                     </div>
                     <div class="tab btns" data-tab-target="#tab3" data-tab-btn="#btn3">
-                        <button id="btn3" data-conbtn class="tests">다이어트🍗</button>
+                        <button id="btn3" data-conbtn class="tests">다이어트</button>
                     </div>
                 </div>
                 <a class="post-link" href="/recommend/post">추천하기</a>
