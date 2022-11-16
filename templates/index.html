@@ -13,7 +13,7 @@
             crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/4c0dfea791.js"crossorigin="anonymous"></script>
 
-    <title>With-Run | Main</title>
+    <title>런-투게더 | 메인</title>
 
         <script src="https://kit.fontawesome.com/4c0dfea791.js" crossorigin="anonymous"></script>
 
@@ -60,15 +60,6 @@
             border: 2px solid white;
         }
 
-        .deco_none {
-            text-decoration: none;
-            color: white;
-        }
-
-        .deco_none:hover{
-            color: white;
-        }
-
         .wrap {
             max-width: 2200px;
             width: 95%;
@@ -91,10 +82,7 @@
             box-shadow: inset -.3rem -.1rem 1.4rem #FBFBFB, inset .3rem .4rem .8rem #BEC5D0;
             cursor: pointer;
 
-
         }
-
-
 
         .col2 {
             transition: all 0.2s linear;
@@ -136,35 +124,45 @@
 
         }
 
-        a {
+        .a_black {
             text-decoration-line: none
         }
 
-        a:link {
+        .a_black:link {
             color: black;
         }
 
-        a:visited {
+        .a_black:visited {
             color: black;
         }
+
+        .deco_none {
+            text-decoration: none;
+            color: white;
+        }
+
+        .deco_none:hover{
+            color: white;
+        }
+
     </style>
 </head>
 
 <body>
     <div class="mytitle">
         <div style="margin-left: 1500px; font-size: 16px;">
-            <a href="" class="deco_none">Home <i class="fa-solid fa-house"></i></a>&nbsp&nbsp
-            <a href="" class="deco_none">Logout <i class="fa-solid fa-right-from-bracket"></i></a>
+            <a href="/index" class="deco_none">Home <i class="fa-solid fa-house"></i></a>&nbsp&nbsp
+            <a href="/login" class="deco_none">Logout <i class="fa-solid fa-right-from-bracket"></i></a>
         </div>
         <div style="width: 500px; text-align: center;">
             <h1 style="font-size: 400%;">런-투게더</h1>
+            <br>
+            <h4>환영합니다!</h4>
         </div>
-        <br>
-        <h4>함께해요 러닝!</h4>
     </div>
     <div class="wrap">
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            <a href="login.html">
+            <a href="/course" class="a_black">
                 <div class="col1">
                     <div class="card">
                         <img src="https://images.unsplash.com/flagged/photo-1556746834-cbb4a38ee593?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1744&q=80"
@@ -175,7 +173,7 @@
                     </div>
                 </div>
             </a>
-            <a href="login.html">
+            <a href="/challenge" class="a_black">
                 <div class="col2">
                     <div class="card">
                         <img src="https://images.unsplash.com/photo-1607962837359-5e7e89f86776?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
@@ -186,7 +184,7 @@
                     </div>
                 </div>
             </a>
-            <a href="login.html">
+            <a href="/recommend" class="a_black">
                 <div class="col3">
                     <div class="card">
                         <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"

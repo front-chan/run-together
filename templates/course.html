@@ -15,7 +15,10 @@
             crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/4c0dfea791.js" crossorigin="anonymous"></script>
 
-    <title>위드런 | 코스 추천</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+
+    <title>런-투게더 | 코스 추천</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 
@@ -130,9 +133,9 @@
                         let desc = rows[i]['desc']
 
 
-                        let temp_html = `<div class="col">
+                        let temp_html = `<div class="col" style="margin-bottom: 20px;">
                                             <div class="card">
-                                                <img src="${url}" class="card-img-top" alt="...">
+                                                <img src="${url}" class="card-img-top" alt="..." height="400px">
                                                 <div class="card-body">
                                                     <h5 class="card-title">${location}</h5>
                                                     <p class="card-text">${desc}</p>
@@ -164,7 +167,13 @@
                 url: '/course/post',
                 data: {url_give: url, desc_give: desc, location_give: location},
                 success: function (response) {
-                    alert(response['msg'])
+                    /*alert(response['msg'])*/
+
+                    Swal.fire({
+                        icon: 'success',  // 여기다가 아이콘 종류를 쓰면 됩니다.
+                        title: '코스 등록이 완료되었습니다.'
+                    });
+
                     window.location.reload()
                 }
             });
@@ -180,8 +189,8 @@
 
     <div class="title">
         <div style="margin-left: 1500px; font-size: 16px;">
-            <a href="" class="deco_none">Home <i class="fa-solid fa-house"></i></a>&nbsp&nbsp
-            <a href="" class="deco_none">Logout <i class="fa-solid fa-right-from-bracket"></i></a>
+            <a href="/index" class="deco_none">Home <i class="fa-solid fa-house"></i></a>&nbsp&nbsp
+            <a href="/login" class="deco_none">Logout <i class="fa-solid fa-right-from-bracket"></i></a>
         </div>
         <div style="width: 500px; text-align: center;">
             <h1 style="font-size: 400%;">런-투게더</h1>
