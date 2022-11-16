@@ -1,11 +1,12 @@
 from flask import Flask, render_template, request, jsonify
-import gridfs
+import certifi
+from pymongo import MongoClient
 
 app = Flask(__name__)
 
-from pymongo import MongoClient
-client = MongoClient('mongodb+srv://HwangSoojeong:sue000871@cluster0.1scxwoi.mongodb.net/?retryWrites=true&w=majority')
-db = client.dbsparta
+ca = certifi.where()
+client = MongoClient('mongodb+srv://rgngr:rgngr@cluster0.apj6ogn.mongodb.net/cluster0?retryWrites=true&w=majority', tlsCAFile=ca)
+db = client.hanghae99_08
 
 @app.route('/')
 def home():
@@ -20,7 +21,7 @@ def challenge_recruit_post():
     contents_receive = request.form['challenge_contents_give']
     img_receive = request.form['challenge_img_give']
 
-    challenge_list = list(db.withrun.find({},{'_id':False}))
+    challenge_list = list(db.challenge.find({},{'_id':False}))
 
     challenge_num = len(challenge_list) + 1
 
@@ -34,13 +35,13 @@ def challenge_recruit_post():
         'challenge_img': img_receive
     }
 
-    db.withrun.insert_one(doc)
+    db.challenge.insert_one(doc)
 
     return jsonify({'msg': '챌린지가 등록 되었습니다.'})
 
 @app.route("/api/challengeList", methods=["GET"])
 def challenge_list_get():
-    challenge_list = list(db.withrun.find({}, {'_id': False}))
+    challenge_list = list(db.challenge.find({}, {'_id': False}))
 
     return jsonify({'challenge': challenge_list})
 
