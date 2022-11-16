@@ -107,7 +107,7 @@
         function listing() {
             $.ajax({
                 type: 'GET',
-                url: '/courselist',
+                url: '/list',
                 data: {},
                 success: function (response) {
                     let rows = response['courses']
