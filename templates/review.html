@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏃‍♀‍위드런🏃‍♂ || 함께 달려요!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        * {
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        .mytitle {
+            width: 100%;
+            height: 350px;
+
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1547483238-f400e65ccd56?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80');
+            background-position: 50% 70%;
+            background-size: cover;
+
+            color: white;
+            background-color: black;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .deco_none {
+            text-decoration: none;
+            color: white;
+        }
+        .deco_none:hover{
+            color: white;
+        }
+        #recommend-box {
+            margin: 10px auto;
+            max-width: 1200px;
+            width: 95%;
+        }
+        #recommend-box > h1 {
+            font-size: 30px;
+            margin-left: 10px;
+        }
+        .category-btns {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 15px;
+            margin-left: 10px;
+        }
+        .box-btn {
+            display: flex;
+            margin: 10px 0;
+        }
+        .box-btn > button {
+            font-size: 15px;
+            width: 100px;
+            padding: 5px 10px;
+            border: 1px solid #d7f4fd;
+            border-radius: 5px;
+            margin-left: 10px;
+            background-color: transparent;
+            transition: background-color .25s ease-in-out;
+            cursor: pointer;
+        }
+        .box-btn > button:hover {
+            background-color: #a7e2f6;
+        }
+        .post-link {
+            margin-right: 150px;
+            text-decoration: none;
+            color: #1f44a8;
+            font-weight: bold;
+        }
+        .post-link:hover {
+            text-decoration: underline;
+        }
+        #review-box {
+            margin: 10px auto;
+            max-width: 1200px;
+            width: 95%;
+            margin-left: 10px;
+            display: flex;
+            justify-content: flex-start;
+        }
+        .input-box {
+            display: flex;
+            flex-direction: column;
+            max-width: 500px;
+            width: 95%;
+            margin-right: 40px;
+        }
+        .input-box > input, .input-box > select {
+            max-width: 460px;
+            margin: 3px 10px 10px 20px;
+            height: 30px;
+            border-radius: 10px;
+            border: 0;
+            font-size: 15px;
+            background-color: #dbe5ea;
+        }
+        .input-box > label {
+            margin: 10px 0 0 10px;
+            color: #1f44a8;
+        }
+        .input-box > textarea {
+            max-width: 500px;
+            margin: 3px 20px 30px 20px;
+            border-radius: 10px;
+            border: 0;
+            font-size: 15px;
+            background-color: #dbe5ea;
+        }
+        .review-img {
+            border-radius: 10px;
+            max-width: 510px;
+            margin-top: 30px;
+            opacity: 80%;
+        }
+        .recommend-btn {
+            width: 100px;
+            margin-left: 30px;
+            padding: 5px 10px;
+            border-radius: 10px;
+            background-color: #1f44a8;
+            border: 0;
+            color: white;
+            cursor: pointer;
+            transition: background-color .35s ease-in-out;
+        }
+        .recommend-btn:hover {
+            background-color: #2c3e70;
+        }
+
+        @media (max-width: 768px) {
+            .category-btns {
+                align-items: center;
+                flex-direction: column;
+            }
+            .post-link {
+                margin-right: 0px;
+            }
+            #review-box {
+                flex-direction: column-reverse;
+           }
+        }
+    </style>
+    <script>
+        function saveRecommend() {
+            let name = $("#name").val();
+            let choose = $('#choose').val();
+            let url = $('#url').val();
+            let comment = $('#comment').val();
+
+            $.ajax({
+                type: "POST",
+                url: "/recommend/post/list",
+                data: {name_give: name, choose_give: choose, url_give:url, comment_give: comment},
+                success: function (response) {
+                    alert(response["msg"]);
+                    window.location.href = "http://localhost:5000/recommend";
+                },
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="mytitle">
+        <div style="margin-left: 1500px; font-size: 16px;">
+            <a href="" class="deco_none">Home <i class="fa-solid fa-house"></i></a>&nbsp&nbsp
+            <a href="" class="deco_none">Logout <i class="fa-solid fa-right-from-bracket"></i></a>
+        </div>
+        <div style="width: 500px; text-align: center;">
+            <h1 style="font-size: 400%;">런-투게더</h1>
+        </div>
+        <br>
+        <h4>용품 추천</h4>
+    </div>
+    <section id="recommend-box">
+        <div class="category-btns">
+            <div class="box-btn">
+                <button class="all-btn" disabled>All</button>
+                <button class="shoes-btn" disabled>러닝화</button>
+                <button class="diet-btn" disabled>다이어트</button>
+            </div>
+            <a class="post-link" href="/recommend">뒤로가기</a>
+        </div>
+        <div id="review-box">
+            <div class="input-box">
+<!--                <form action="">-->
+                <label for="name">닉네임</label>
+                <input type="text" id="name" name="name" placeholder="name">
+                <label for="choose">카테고리</label>
+                <select name="choose" id="choose">
+                    <option value="choice">카테고리를 선택해주세요</option>
+                    <option value="shoes">러닝화</option>
+                    <option value="diet">다이어트</option>
+                </select>
+                <label for="url">이미지 URL</label>
+                <input type="text" id="url" name="url" placeholder="image URL">
+                <label for="comment">추천 이유</label>
+                <textarea name="comment" id="comment" cols="35" rows="5" placeholder="comment"></textarea>
+                <button type="submit" class="recommend-btn" onclick="saveRecommend()">추천하기</button>
+            <!--</form>-->
+            </div>
+            <img class="review-img" src="https://media.istockphoto.com/id/1366052585/photo/shot-of-a-group-of-friends-hanging-out-before-working-out-together.jpg?b=1&s=170667a&w=0&k=20&c=z5JTIJ3k0QgJCEMPpJQ_JvnGzN_izKQgJRB5YKHgFV0="
+                 alt="">
+        </div>
+    </section>
+</body>
+</html>

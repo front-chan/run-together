@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏃‍♀‍Run-Together🏃‍♂ || 함께 달려요!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/4c0dfea791.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        body::-webkit-scrollbar {
+            display: none;
+        }
+        .mytitle {
+            width: 100%;
+            height: 350px;
+
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1547483238-f400e65ccd56?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80');
+            background-position: 50% 70%;
+            background-size: cover;
+
+            color: white;
+            background-color: black;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .deco_none {
+            text-decoration: none;
+            color: white;
+        }
+        .deco_none:hover{
+            color: white;
+        }
+        #recommend-box {
+            margin: 10px auto;
+            max-width: 1200px;
+            width: 95%;
+        }
+        #recommend-box > h1 {
+            font-size: 30px;
+            margin-left: 10px;
+        }
+        .items {
+            max-width: 1200px;
+            width: 95%;
+            display: none;
+            padding: 10px;
+            position: relative;
+        }
+        .items.active {
+            display: inline-block;
+        }
+        .category-btns {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 15px;
+            margin-left: 10px;
+        }
+        .box-btn {
+            display: flex;
+            margin: 10px 0;
+        }
+        .tests {
+            font-size: 15px;
+            width: 100px;
+            padding: 5px 10px;
+            border: 1px solid #d7f4fd;
+            border-radius: 5px;
+            margin-left: 10px;
+            background-color: transparent;
+            transition: background-color .25s ease-in-out;
+            cursor: pointer;
+        }
+        .tests:hover {
+            background-color: #a7e2f6;
+        }
+        .tests.actives {
+            background-color: #a7e2f6;
+        }
+
+        .post-link {
+            margin-right: 150px;
+            text-decoration: none;
+            color: #1f44a8;
+            font-weight: bold;
+        }
+        .post-link:hover {
+            text-decoration: underline;
+        }
+        #products-box-shoes, #products-box-diet, #products-box-all {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+        .shoes-box {
+            flex: 0 1 250px;
+            max-width: 250px;
+            height: 380px;
+            width: 95%;
+            box-shadow: 0px 0px 2px 0px gray;
+            border-radius: 10px;
+            margin: 10px;
+            overflow: hidden;
+            background-color: white;
+        }
+        .shoes-box > img {
+            width: 250px;
+            height: 167px;
+        }
+        .text-box {
+            color: #014b64;
+            margin: 10px;
+        }
+        .text-box > h5 {
+            margin-top: 0px;
+        }
+        .text-comment {
+            max-height: 140px;
+            overflow: scroll;
+        }
+        .text-comment::-webkit-scrollbar {
+            display: none;
+        }
+        .text-line {
+            display: flex;
+            justify-content: space-between;
+        }
+        .text-line > h5 {
+            margin: 0;
+        }
+        .delete-btn {
+            background-color: transparent;
+            border: 1px solid #2c3e70;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color .25s ease-in-out;
+        }
+        .delete-btn:hover {
+            background-color: #475375;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            #products-box-shoes, #products-box-diet, #products-box-all {
+                justify-content: center;
+            }
+            .category-btns {
+                align-items: center;
+                flex-direction: column;
+            }
+            .post-link {
+                margin-right: 0px;
+            }
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            showList();
+        });
+
+        function showList() {
+            $.ajax({
+                type: "GET",
+                url: "/recommend/post/list",
+                data: {},
+                success: function (response) {
+                    const rows = response.recommends;
+                    for (let row of rows) {
+                        let name = row.name;
+                        let choose = row.choose;
+                        let url = row.url;
+                        let comment = row.comment;
+                        let num = row.num;
+
+                        let txt = `<div class="shoes-box">
+                                            <img src="${url}" alt="diet">
+                                            <div class="text-box">
+                                                <div class="text-line">
+                                                    <h5>${name}</h5>
+                                                    <button type="button" onclick="recommendDel(${num})" class="delete-btn">삭제</button>
+                                                </div>
+                                                <p class="text-comment"> ${comment}</p>
+                                            </div>
+                                        </div>`;
+
+                        if (choose === 'shoes') {
+                            $("#products-box-shoes").append(txt);
+                            $("#products-box-all").append(txt);
+                        } else if (choose === 'diet') {
+                            $("#products-box-diet").append(txt);
+                            $("#products-box-all").append(txt);
+                        } else {
+                            $("#products-box-all").append(txt);
+                        }
+                    }
+                },
+            });
+        }
+
+        function recommendDel(num) {
+            $.ajax({
+                type: "POST",
+                url: "/recommend/delete",
+                data: {num_give: num},
+                success: function (response) {
+                    alert(response["msg"])
+                    window.location.reload()
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="mytitle">
+        <div style="margin-left: 1500px; font-size: 16px;">
+            <a href="" class="deco_none">Home <i class="fa-solid fa-house"></i></a>&nbsp&nbsp
+            <a href="" class="deco_none">Logout <i class="fa-solid fa-right-from-bracket"></i></a>
+        </div>
+        <div style="width: 500px; text-align: center;">
+            <h1 style="font-size: 400%;">런-투게더</h1>
+        </div>
+        <br>
+        <h4>용품 추천</h4>
+    </div>
+    <section id="recommend-box">
+        <div class="tabs">
+            <div class="category-btns">
+                <div class="box-btn">
+                    <div class="tab btns" data-tab-target="#tab1" data-tab-btn="#btn1">
+                        <button id="btn1" data-conbtn class="tests actives">All</button>
+                    </div>
+                    <div class="tab btns" data-tab-target="#tab2" data-tab-btn="#btn2">
+                        <button id="btn2" data-conbtn class="tests">러닝화</button>
+                    </div>
+                    <div class="tab btns" data-tab-target="#tab3" data-tab-btn="#btn3">
+                        <button id="btn3" data-conbtn class="tests">다이어트</button>
+                    </div>
+                </div>
+                <a class="post-link" href="/recommend/post">추천하기</a>
+            </div>
+        </div>
+        <div class="content">
+            <div id="tab1" data-tab-content class="items active">
+                <div id="products-box-all"></div>
+            </div>
+            <div id="tab2" data-tab-content class="items">
+                <div id="products-box-shoes"></div>
+            </div>
+            <div id="tab3" data-tab-content class="items">
+                <div id="products-box-diet"></div>
+            </div>
+        </div>
+    </section>
+    <script>
+
+        const tabs = document.querySelectorAll("[data-tab-target]");
+        const tabcon = document.querySelectorAll("[data-tab-content]");
+        const btns = document.querySelectorAll('[data-tab-btn]');
+        const conBtn = document.querySelectorAll('[data-conbtn]')
+
+        btns.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const activeBtn = document.querySelector(btn.dataset.tabBtn);
+                conBtn.forEach((btnAll) => {
+                    btnAll.classList.remove("actives");
+                });
+                activeBtn.classList.add("actives");
+            });
+        });
+
+        tabs.forEach((tab) => {
+            tab.addEventListener("click", () => {
+                const target = document.querySelector(tab.dataset.tabTarget);
+                tabcon.forEach((tabAll) => {
+                    tabAll.classList.remove("active");
+                });
+                target.classList.add("active");
+            });
+        });
+    </script>
+</body>
+</html>
