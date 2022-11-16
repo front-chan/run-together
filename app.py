@@ -1,3 +1,5 @@
+import json
+
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 import certifi
 import random
@@ -23,19 +25,19 @@ ca = certifi.where()
 client = MongoClient('mongodb+srv://rgngr:rgngr@cluster0.apj6ogn.mongodb.net/cluster0?retryWrites=true&w=majority', tlsCAFile=ca)
 db = client.hanghae99_08
 
-@app.route('/')
-def home():
-    token_receive = request.cookies.get('mytoken')
-    try:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        user_info = db.user.find_one({"id": payload['id']})
-        return render_template('login.html', user_info=user_info)
-    except jwt.ExpiredSignatureError:
-        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
-    except jwt.exceptions.DecodeError:
-        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
-    except jwt.exceptions.DecodeError:
-        return redirect(url_for("index", msg="메인 페이지 입니다."))
+# @app.route('/')
+# def home():
+#     token_receive = request.cookies.get('mytoken')
+#     try:
+#         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+#         user_info = db.user.find_one({"id": payload['id']})
+#         return render_template('login.html', user_info=user_info)
+#     except jwt.ExpiredSignatureError:
+#         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+#     except jwt.exceptions.DecodeError:
+#         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
+#     except jwt.exceptions.DecodeError:
+#         return redirect(url_for("index", msg="메인 페이지 입니다."))
 
 
 @app.route('/login')
@@ -53,10 +55,14 @@ def register():
 def page():
     token_receive = request.cookies.get('mytoken')
 
+    print("token_receive : " + token_receive)
+
     try:
         # 로그인 정보
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.user.find_one({"userId": payload["id"]})
+
+        print(user_info)
 
         return render_template("index.html", user_info=user_info)
 
@@ -115,14 +121,18 @@ def api_login():
         # 시크릿키가 있어야 토큰을 디코딩(=풀기) 해서 payload 값을 볼 수 있습니다.
         # 아래에선 id와 exp를 담았습니다. 즉, JWT 토큰을 풀면 유저ID 값을 알 수 있습니다.
         # exp에는 만료시간을 넣어줍니다. 만료시간이 지나면, 시크릿키로 토큰을 풀 때 만료되었다고 에러가 납니다.
+
         payload = {
             'id': id_receive,
             'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=60 * 60 * 1)
         }
-        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+
+        token = jwt.encode({'id': id_receive}, SECRET_KEY, algorithm='HS256').decode('utf8')
+
+        print(json.dumps(token))
 
         # token을 줍니다.
-        return jsonify({'result': 'success', 'token': token})
+        return jsonify({'result': 'success', 'token': json.dumps(token)})
     # 찾지 못하면
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
