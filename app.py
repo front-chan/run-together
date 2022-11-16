@@ -3,9 +3,12 @@ from flask import Flask, redirect, url_for
 app = Flask(__name__)
 
 from pymongo import MongoClient
+import certifi
 
-client = MongoClient('mongodb+srv://test:sparta@cluster0.rk2rp.mongodb.net/cluster0?retryWrites=true&w=majority' tlsCAFile=ca)
-db = client.dbsparta
+ca=certifi.where()
+
+client = MongoClient('mongodb+srv://rgngr:rgngr@cluster0.apj6ogn.mongodb.net/cluster0?retryWrites=true&w=majority', tlsCAFile=ca)
+db = client.hanghae99_08
 
 # JWT 토큰을 만들 때 필요한 비밀문자열입니다. 아무거나 입력해도 괜찮습니다.
 # 이 문자열은 서버만 알고있기 때문에, 내 서버에서만 토큰을 인코딩(=만들기)/디코딩(=풀기) 할 수 있습니다.
@@ -150,9 +153,12 @@ def api_valid():
         # payload 안에 id가 들어있습니다. 이 id로 유저정보를 찾습니다.
         # 여기에선 그 예로 닉네임을 보내주겠습니다.
         user_info = db.user.find_one({'userid': payload['id']}, {'_id': 0})
-        return jsonify({'result': 'success', 'nickname': userinfo['nick']})
+        return jsonify({'result': 'success', 'nickname': user_info['nick']})
     except jwt.ExpiredSignatureError:
         # 위를 실행했는데 만료시간이 지났으면 에러가 납니다.
         return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
     except jwt.exceptions.DecodeError:
         return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
+
+if __name__ == '__main__':
+    app.run('0.0.0.0', port=5000, debug=True)
