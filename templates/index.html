@@ -105,10 +105,10 @@
     </style>
     <script>
         $(document).ready(function () {
-            listing();
+            challengeList();
         });
 
-        function listing() {
+        function challengeList() {
             $.ajax({
                 type: 'GET',
                 url: '/api/challengeList',
@@ -124,10 +124,11 @@
                         let challenge_start_date = rows[i]['challenge_start_date']
                         let challenge_end_date = rows[i]['challenge_end_date']
                         let challenge_contents = rows[i]['challenge_contents']
+                        let challenge_img = rows[i]['challenge_img']
 
                         let temp_html = `<div class="col">
                                             <div class="card h-100">
-                                                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjAxMjBfOTQg%2FMDAxNjQyNjU1NDE3MjUy.MRNWjEO1S-P0MWyY_C9iRwQL0QnnuqD1i5TC2KGpMLsg.ErbHNyL9VF9GwRXQOmqkqqrnRhurCLTFGJtHe86SKpkg.JPEG.angayu%2FIMG%25A3%25DF20220120%25A3%25DF19.jpg&type=a340" class="card-img-top" alt="...">
+                                                <img src="${challenge_img}" height="280px" class="card-img-top" alt="...">
                                                 <div class="card-body">
                                                     <h5 class="card-title font-bold">${challenge_title}</h5>
                                                     <input type="hidden" value="${challenge_num}">
@@ -175,7 +176,6 @@
                             console.log(response)
                         }
                     })
-
                     Swal.fire('신청 되었습니다.');
                 }
             });
@@ -183,8 +183,8 @@
 
         function challengeRecruit() {
             //러닝 챌린지 모집 글 작성
-            let img = $('#challenge_img').val()
-            console.log(img)
+            let challenge_img = $('#challenge_img').val()
+            console.log(challenge_img)
 
             let challenge_title = $('#challenge_title').val()
             console.log(challenge_title)
@@ -204,7 +204,7 @@
             $.ajax({
                 type: 'POST',
                 url: '/api/challengeRecruit',
-                data: {challenge_title_give:challenge_title, challenge_deadline_give:challenge_deadline, challenge_start_date_give:challenge_start_date,
+                data: {challenge_img_give:challenge_img,challenge_title_give:challenge_title, challenge_deadline_give:challenge_deadline, challenge_start_date_give:challenge_start_date,
                         challenge_end_date_give:challenge_end_date, challenge_contents_give:challenge_contents},
                 success: function (response) {
                     /*alert(response['msg'])*/
@@ -252,41 +252,45 @@
     <div class="modal fade modal-dialog-scrollable" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
          tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title font-bold" id="staticBackdropLabel">러닝 챌린지 모집하기</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-floating mb-3">
-                        <div class="mb-3">
-                            <input class="form-control" type="file" id="challenge_img">
+            //모달 - 챌린지 글 작성
+            <!--<form action="/challengeUpload" method="post" id="uploadForm" enctype="multipart/form-data">-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title font-bold" id="staticBackdropLabel">러닝 챌린지 모집하기</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-floating mb-3">
+                            <div class="input-group mb-3">
+                            <span class="input-group-text">이미지 URL</span>
+                            <input type="text" class="form-control" id="challenge_img" name="challenge_img" aria-label="challenge_img" aria-describedby="basic-addon1">
+                        </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">제목</span>
+                            <input type="text" class="form-control" id="challenge_title" name="challenge_title" aria-label="challenge_title" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon2">모집기한</span>
+                            <input type="date" class="form-control" id="challenge_deadline" name="challenge_deadline" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon3">러닝기간</span>
+                            <input type="date" class="form-control" placeholder="Username" id="challenge_start_date" name="challenge_start_date" aria-label="Username">
+                            <span class="input-group-text">~</span>
+                            <input type="date" class="form-control" placeholder="Server" id="challenge_end_date" name="challenge_end_date" aria-label="Server">
+                        </div>
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="Leave a comment here" id="challenge_contents" name="challenge_contents" style="height: 250px"></textarea>
+                            <label for="challenge_contents">모집 내용</label>
                         </div>
                     </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">제목</span>
-                        <input type="text" class="form-control" id="challenge_title" aria-label="challenge_title" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon2">모집기한</span>
-                        <input type="date" class="form-control" id="challenge_deadline" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon3">러닝기간</span>
-                        <input type="date" class="form-control" placeholder="Username" id="challenge_start_date" aria-label="Username">
-                        <span class="input-group-text">~</span>
-                        <input type="date" class="form-control" placeholder="Server" id="challenge_end_date" aria-label="Server">
-                    </div>
-                    <div class="form-floating">
-                        <textarea class="form-control" placeholder="Leave a comment here" id="challenge_contents" style="height: 250px"></textarea>
-                        <label for="challenge_contents">모집 내용</label>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="challengeRecruit()">등록</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="challengeRecruit()">등록</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                </div>
-            </div>
+            <!--</form>-->
         </div>
     </div>
 

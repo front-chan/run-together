@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, jsonify
+import gridfs
+
 app = Flask(__name__)
 
 from pymongo import MongoClient
@@ -16,6 +18,7 @@ def challenge_recruit_post():
     start_date_receive = request.form['challenge_start_date_give']
     end_date_receive = request.form['challenge_end_date_give']
     contents_receive = request.form['challenge_contents_give']
+    img_receive = request.form['challenge_img_give']
 
     challenge_list = list(db.withrun.find({},{'_id':False}))
 
@@ -27,7 +30,8 @@ def challenge_recruit_post():
         'challenge_deadline': deadline_receive,
         'challenge_start_date': start_date_receive,
         'challenge_end_date': end_date_receive,
-        'challenge_contents': contents_receive
+        'challenge_contents': contents_receive,
+        'challenge_img': img_receive
     }
 
     db.withrun.insert_one(doc)
