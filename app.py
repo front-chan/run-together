@@ -9,7 +9,7 @@ db = client.dbsparta
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('challenge.html')
 
 @app.route("/api/challengeRecruit", methods=["POST"])
 def challenge_recruit_post():
