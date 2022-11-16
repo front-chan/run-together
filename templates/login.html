@@ -13,6 +13,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -158,11 +161,39 @@
                 // 이 토큰을 mytoken이라는 키 값으로 쿠키에 저장합니다.
                 $.cookie('mytoken', response['token']);
 
-                alert('로그인 완료!')
-                window.location.href = '/index'
+                Swal.fire({
+                        title: '로그인 성공!',
+                        icon: 'success',
+
+                        showCancelButton: false, // cancel버튼 보이기. 기본은 원래 없음
+                        confirmButtonColor: '#716add', // confrim 버튼 색깔 지정
+                        confirmButtonText: 'OK', // confirm 버튼 텍스트 지정
+
+                        reverseButtons: true, // 버튼 순서 거꾸로
+
+                    }).then(result => {
+                        if (result.isConfirmed) { // 만약 모달창에서 확인 버튼을 눌렀다면
+                            window.location.href = '/index'
+                        }
+                    });
+
             } else {
                 // 로그인이 안되면 에러메시지를 띄웁니다.
-                alert(response['msg'])
+                Swal.fire({
+                        title: '아이디 또는 비밀번호가 \n일치하지 않습니다.',
+                        icon: 'error',
+
+                        showCancelButton: false, // cancel버튼 보이기. 기본은 원래 없음
+                        confirmButtonColor: '#d33', // confrim 버튼 색깔 지정
+                        confirmButtonText: '닫기', // confirm 버튼 텍스트 지정
+
+                        reverseButtons: true, // 버튼 순서 거꾸로
+
+                    }).then(result => {
+                        if (result.isConfirmed) { // 만약 모달창에서 확인 버튼을 눌렀다면
+
+                        }
+                    });
             }
         }
     })

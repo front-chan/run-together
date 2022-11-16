@@ -167,14 +167,22 @@
                 url: '/course/post',
                 data: {url_give: url, desc_give: desc, location_give: location},
                 success: function (response) {
-                    /*alert(response['msg'])*/
-
                     Swal.fire({
-                        icon: 'success',  // 여기다가 아이콘 종류를 쓰면 됩니다.
-                        title: '코스 등록이 완료되었습니다.'
+                        title: '추천 코스가 등록되었습니다.',
+                        icon: 'success',
+
+                        showCancelButton: false, // cancel버튼 보이기. 기본은 원래 없음
+                        confirmButtonColor: '#716add', // confrim 버튼 색깔 지정
+                        confirmButtonText: 'OK', // confirm 버튼 텍스트 지정
+
+                        reverseButtons: true, // 버튼 순서 거꾸로
+
+                    }).then(result => {
+                        if (result.isConfirmed) { // 만약 모달창에서 확인 버튼을 눌렀다면
+                            window.location.reload()
+                        }
                     });
 
-                    window.location.reload()
                 }
             });
         }
