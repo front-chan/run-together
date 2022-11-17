@@ -160,8 +160,8 @@
             if (response['result'] == 'success') {
                 // 로그인이 정상적으로 되면, 토큰을 받아옵니다.
                 // 이 토큰을 mytoken이라는 키 값으로 쿠키에 저장합니다.
-                $.cookie('mytoken', response['token']);
-                console.log(response)
+                $.cookie('mytoken', response['token'].slice(1,-1));
+                console.log(response['token'].slice(1,-1))
 
                 Swal.fire({
                         title: '로그인 성공!',

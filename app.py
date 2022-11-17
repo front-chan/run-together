@@ -25,19 +25,19 @@ ca = certifi.where()
 client = MongoClient('mongodb+srv://rgngr:rgngr@cluster0.apj6ogn.mongodb.net/cluster0?retryWrites=true&w=majority', tlsCAFile=ca)
 db = client.hanghae99_08
 
-# @app.route('/')
-# def home():
-#     token_receive = request.cookies.get('mytoken')
-#     try:
-#         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-#         user_info = db.user.find_one({"id": payload['id']})
-#         return render_template('login.html', user_info=user_info)
-#     except jwt.ExpiredSignatureError:
-#         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
-#     except jwt.exceptions.DecodeError:
-#         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
-#     except jwt.exceptions.DecodeError:
-#         return redirect(url_for("index", msg="메인 페이지 입니다."))
+@app.route('/')
+def home():
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.user.find_one({"id": payload['id']})
+        return render_template('login.html', user_info=user_info)
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for("index", msg="메인 페이지 입니다."))
 
 
 @app.route('/login')
@@ -124,7 +124,7 @@ def api_login():
 
         payload = {
             'id': id_receive,
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=60 * 60 * 1)
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=60 * 60 * 60 * 60 * 60 * 1)
         }
 
         token = jwt.encode({'id': id_receive}, SECRET_KEY, algorithm='HS256').decode('utf8')
